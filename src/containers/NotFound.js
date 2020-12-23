@@ -4,8 +4,9 @@ import './NotFound.css';
 export default function NotFound(){
     return(
         <div className='NotFound'>
-            <h3>Page Not Found</h3>
-
+            <div className='lander'>
+                <h1>Sorry Page Not Found</h1>
+            </div>
         </div>
     )
 }
