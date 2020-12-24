@@ -3,13 +3,15 @@ import { useFormFields } from '../libs/hooksLibs';
 import { useHistory } from 'react-router-dom';
 import useAppContext from '../libs/contextLib';
 import {FormControl, FormGroup, TextField, Input, InputLabel, Button} from "@material-ui/core";
+import { Auth } from 'aws-amplify';
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Signup(){
     const [fields, handleFieldChange] = useFormFields({
         email: '',
         password: '',
         confirmPassword: '',
-        confirmationCode: ''
+        confirmationCode: '',
     });
 
     const history = useHistory()
@@ -30,45 +32,74 @@ export default function Signup(){
         return fields.confirmationCode.length > 0;
     }
 
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault();
         setIsLoading(true);
-        setNewUser('test');
-        setIsLoading(false);
+
+        try{
+            const newUser = await Auth.signUp({
+                username: fields.email,
+                password: fields.password,
+            })
+            setIsLoading(false);
+            setNewUser(newUser);
+        } catch(e) {
+            alert(e.message);
+            setIsLoading(false);
+        }
     }
 
-    function handleConfirmationSubmit(event){
+    async function handleConfirmationSubmit(event){
         event.preventDefault();
         setIsLoading(true);
+        try{
+            await Auth.confirmSignUp(fields.email, fields.confirmationCode);
+            await Auth.signIn(fields.email, fields.password);
+            userHasAuthenticated(true);
+            history.push('/');
+        } catch(e) {
+            alert(e.message);
+            setIsLoading(false);
+
+        }
     }
 
     function renderConfirmationForm(){
         return(
             <div className='signup'>
                 <div className='lander'>
-                <h3>Please check your email for the code.</h3>
-                <FormControl>
-                <InputLabel>Confirmation Code</InputLabel>
-                <Input
-                    id='confirmationCode'
-                    value={fields.confirmationCode}
-                    onChange={handleFieldChange}
-                />
-            </FormControl>
-            <br/>
-            <br/>
-            <Button
-                    variant="contained"
-                    color="primary"
-                    type='submit'
-                    disabled={!validateConfirmationForm()}
-                    onClick={handleConfirmationSubmit}
-                    >
-                        Verify
-                </Button>
-
+                    {isLoading ?
+                            <>
+                                <h1>Verifying...</h1>
+                                <ClipLoader/>
+                                <br/>
+                                <br/>
+                            </>:
+                            <>
+                                <h3>Please check your email for the code.</h3>
+                                <FormControl>
+                                    <InputLabel>Confirmation Code</InputLabel>
+                                    <Input
+                                        id='confirmationCode'
+                                        value={fields.confirmationCode}
+                                        onChange={handleFieldChange}
+                                    />
+                                </FormControl>
+                                <br/>
+                                <br/>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type='submit'
+                                    disabled={!validateConfirmationForm()}
+                                    onClick={handleConfirmationSubmit}
+                                >
+                                    Verify
+                                </Button>
+                            </>}
                 </div>
             </div>
+
         )
 
     }
@@ -77,7 +108,14 @@ export default function Signup(){
         return(
         <div className='signup'>
             <div className='lander'>
-            <FormControl>
+                {isLoading ?
+                <>
+
+                    <h2>Registering your account...</h2> 
+                    <ClipLoader/>
+                </> :
+                <>
+                    <FormControl>
                 <InputLabel>Email</InputLabel>
                 <Input
                     type='email'
@@ -120,6 +158,8 @@ export default function Signup(){
                     >
                         Sign Up
                 </Button>
+                </>
+                }
             </div>
         </div>
         )
