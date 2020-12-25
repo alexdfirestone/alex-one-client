@@ -43,7 +43,7 @@ export default function Login(){
         <div  className='login'>
             <div className='lander'>
 
-                {isLoading ? 
+                {isLoading ?
                     <>
                     <h1>Logging in...</h1>
                     <ClipLoader/>

@@ -8,6 +8,10 @@ import Button from "@material-ui/core/Button";
 import { AppContext } from './libs/contextLib';
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Grid from '@material-ui/core/Grid';
+
 
 
 function App() {
@@ -49,16 +53,28 @@ function App() {
       <AppBar position="sticky">
         <ToolBar>
           {isAuthenticated ? (
-            <Button component={Link} to='/logout' color='inherit' onClick={handleLogout}>Logout</Button>
+            <>
+              <IconButton edge="start"  color="inherit" aria-label="menu">
+                <MenuIcon />
+              </IconButton>
+              <Button component={Link} to='/' color='inherit'>Home</Button>
+              <Button component={Link} to='/about' color='inherit'>About</Button>
+              <Grid container justify="flex-end">
+                <Button component={Link} to='/logout' color='inherit' onClick={handleLogout} >Logout</Button>
+              </Grid>
 
+            </>
           ) : (
             <>
-              <Button component={Link} to='/login' color='inherit'>Login</Button>
-              <Button component={Link} to='/signup' color='inherit'>Sign Up</Button>
+              <Button component={Link} to='/' color='inherit'>Home</Button>
+              <Button component={Link} to='/about' color='inherit'>About</Button>
+              <Grid container justify="flex-end">
+                <Button component={Link} to='/login' color='inherit' >Login</Button>
+                <Button component={Link} to='/signup' color='inherit'>Sign Up</Button>
+              </Grid>
             </>
           )}
-          <Button component={Link} to='/' color='inherit'>Home</Button>
-          <Button component={Link} to='/about' color='inherit'>About</Button>
+
 
         </ToolBar>
       </AppBar>
@@ -72,3 +88,6 @@ function App() {
 }
 
 export default App;
+
+
+
