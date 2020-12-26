@@ -1,8 +1,15 @@
-.Signup .lander {
-    padding: 80px 0;
+.signup {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.signup .lander {
+    padding: 300px 0;
     text-align: center;
+    width: 50%;
+    margin: 0 auto;
   }
-  .Signup .lander h1 {
+  .signup .lander h1 {
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
   }

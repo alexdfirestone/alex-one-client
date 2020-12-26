@@ -5,6 +5,8 @@ import useAppContext from '../libs/contextLib';
 import { useHistory } from 'react-router-dom';
 import ClipLoader from "react-spinners/ClipLoader";
 import { useFormFields } from '../libs/hooksLibs';
+import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 
@@ -40,13 +42,21 @@ export default function Login(){
 
 
     return(
-        <div  className='login'>
-            <div className='lander'>
 
-                {isLoading ?
+        <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '60vh' }}
+        >
+
+            <Grid item xs={3}>
+            {isLoading ?
                     <>
                     <h1>Logging in...</h1>
-                    <ClipLoader/>
+                    <CircularProgress/>
                     <br/>
                     <br/>
                     </>
@@ -89,9 +99,9 @@ export default function Login(){
                 </Button>
                 </>
                 }
+            </Grid>   
 
-            </div>
-        </div>
+        </Grid>
     )
 
 }

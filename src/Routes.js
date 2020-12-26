@@ -5,6 +5,9 @@ import About from './containers/About';
 import Login from './containers/Login';
 import NotFound from './containers/NotFound';
 import Signup from './containers/Signup';
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+import ApiTest from './containers/ApiTest';
 
 export default function Routes(){
     return(
@@ -15,12 +18,15 @@ export default function Routes(){
             <Route exact path='/about'>
                 <About/>
             </Route>
-            <Route exact path='/login'>
+            <UnauthenticatedRoute exact path='/login'>
                 <Login/>
-            </Route>
-            <Route exact path='/signup'>
+            </UnauthenticatedRoute>
+            <UnauthenticatedRoute exact path='/signup'>
                 <Signup/>
-            </Route>
+            </UnauthenticatedRoute>
+            <AuthenticatedRoute exact path='/apitest'>
+                <ApiTest/>
+            </AuthenticatedRoute>
             <Route>
                 <NotFound/>
             </Route>

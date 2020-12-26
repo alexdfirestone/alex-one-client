@@ -5,6 +5,8 @@ import useAppContext from '../libs/contextLib';
 import {FormControl, FormGroup, TextField, Input, InputLabel, Button} from "@material-ui/core";
 import { Auth } from 'aws-amplify';
 import ClipLoader from "react-spinners/ClipLoader";
+import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function Signup(){
     const [fields, handleFieldChange] = useFormFields({
@@ -60,22 +62,30 @@ export default function Signup(){
         } catch(e) {
             alert(e.message);
             setIsLoading(false);
-
         }
     }
 
     function renderConfirmationForm(){
         return(
-            <div className='signup'>
-                <div className='lander'>
-                    {isLoading ?
-                            <>
-                                <h1>Verifying...</h1>
-                                <ClipLoader/>
-                                <br/>
-                                <br/>
-                            </>:
-                            <>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                style={{ minHeight: '100vh' }}
+            >
+
+                <Grid item xs={3}>
+                {isLoading ?
+                                <>
+                                    <h1>Verifying...</h1>
+                                    <CircularProgress/>
+                                    <br/>
+                                    <br/>
+                                </>
+                            :
+                             <>
                                 <h3>Please check your email for the code.</h3>
                                 <FormControl>
                                     <InputLabel>Confirmation Code</InputLabel>
@@ -97,8 +107,8 @@ export default function Signup(){
                                     Verify
                                 </Button>
                             </>}
-                </div>
-            </div>
+                </Grid>
+            </Grid>
 
         )
 
@@ -106,15 +116,24 @@ export default function Signup(){
 
     function renderForm(){
         return(
-        <div className='signup'>
-            <div className='lander'>
-                {isLoading ?
+            <Grid
+                container
+                spacing={0}
+                direction="column" 
+                alignItems='center'
+                justify="center"
+                style={{ minHeight: '10vh' }}
+            >
+
+        <Grid item xs={3}>
+        {isLoading ?
                 <>
 
                     <h2>Registering your account...</h2> 
-                    <ClipLoader/>
+                    <CircularProgress/>
                 </> :
                 <>
+                    <h1>Sign Up</h1>
                     <FormControl>
                 <InputLabel>Email</InputLabel>
                 <Input
@@ -160,8 +179,8 @@ export default function Signup(){
                 </Button>
                 </>
                 }
-            </div>
-        </div>
+        </Grid>
+</Grid>
         )
     }
 

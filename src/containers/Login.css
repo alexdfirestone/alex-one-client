@@ -1,8 +1,9 @@
-.Login .lander {
+.login .lander {
     padding: 80px 0;
     text-align: center;
+    width: 100%;
   }
-  .Login .lander h1 {
+  .login .lander h1 {
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
   }
