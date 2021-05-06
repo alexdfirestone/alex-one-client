@@ -7,4 +7,9 @@ const config = {
     }
 }
 
+
+export const api = {
+    url: 'https://a9qr68a487.execute-api.us-east-1.amazonaws.com/Prod/MyResource'
+}
+
 export default config;

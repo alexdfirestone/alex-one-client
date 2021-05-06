@@ -142,6 +142,16 @@ function App() {
         icon: <PublicIcon/>,
         onClick: () => history.push('/apitest')
       },
+      {
+        text: 'Add Movie',
+        icon: <PublicIcon/>,
+        onClick: () => history.push('/addmovie')
+      },
+      {
+        text: 'Movies',
+        icon: <PublicIcon/>,
+        onClick: () => history.push('/movies')
+      }
     ];
 
 
