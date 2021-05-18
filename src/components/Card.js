@@ -5,6 +5,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
+import FormDialog from './FormDialog'
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard({title, year, status}) {
+export default function SimpleCard({title, year, status, id, url}) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -34,7 +36,10 @@ export default function SimpleCard({title, year, status}) {
           {year}
         </Typography>
         <Typography variant="h5" component="h2">
-          {title}
+        <Link to={`${url}/${year}/${id}`} style={{
+          color: '#3f51b5',
+          textDecoration: 'none'
+          }}>{title}</Link>
         </Typography>
         <Typography variant="body2" component="p">
             <br />
@@ -43,7 +48,7 @@ export default function SimpleCard({title, year, status}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Change Status</Button>
+        <FormDialog year={year} id={id} ButtonTitle='CHANGE STATUS' currentStatus={status}></FormDialog>
       </CardActions>
     </Card>
   );

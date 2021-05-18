@@ -2,12 +2,13 @@ import React from 'react';
 import './AddMovie.css';
 import { useFetch } from '../libs/hooksLibs';
 import { v4 as uuidv4 } from 'uuid';
-
+import { api } from  '../config.js';
 import { useFormFields } from '../libs/hooksLibs';
+import {FormControl, FormGroup, TextField, Input, InputLabel, Button, Select, MenuItem} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {FormControl, FormGroup, TextField, Input, InputLabel, Button, Select, MenuItem} from "@material-ui/core";
-import { api } from  '../config.js'
+import { Link, useRouteMatch } from 'react-router-dom';
+
 
 
 export default function AddMovie() {
@@ -54,7 +55,8 @@ export default function AddMovie() {
             alert(e.message);
             setIsLoading(false);
         }
-
+        fields.title = ''
+        fields.year = ''
         await setIsLoading(false);
 
     }
@@ -85,7 +87,7 @@ export default function AddMovie() {
                         type='text'
                         autoFocus='true'
                         id='title'
-                        value={fields.title}
+                        defaultValue={fields.title}
                         onChange={handleFieldChange}
                         />
                 </FormControl>
@@ -96,7 +98,7 @@ export default function AddMovie() {
                     <Input
                         type='text'
                         id='year'
-                        value={fields.year}
+                        defaultValue={fields.year}
                         onChange={handleFieldChange}
 
                         />
@@ -105,7 +107,7 @@ export default function AddMovie() {
                 <br/>
                 <FormControl>
                 <InputLabel id="label">Status</InputLabel>
-                <Select labelId="label" id="watched" value={status} onChange={handleFieldChange && handleSwitchChange}>
+                <Select labelId="label" id="watched" defaultValue={status} onChange={handleFieldChange && handleSwitchChange}>
                     <MenuItem value={true}>Watched</MenuItem>
                     <MenuItem value={false}>Not Watched</MenuItem>
                 </Select>
@@ -122,6 +124,14 @@ export default function AddMovie() {
                     >
                         Add
                 </Button>
+                <Link to={'/movies'}>
+                    <Button variant="outlined" style={{
+                        marginLeft: "1rem"
+                    }}>
+                        Back to Movies
+                    </Button>
+                </Link>
+            
                     </>
                 }
                 </Grid>

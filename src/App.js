@@ -19,6 +19,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PublicIcon from '@material-ui/icons/Public';
+import HomeIcon from '@material-ui/icons/Home';
+import MovieFilterIcon from '@material-ui/icons/MovieFilter';
 import Divider from '@material-ui/core/Divider';
 import InfoIcon from '@material-ui/icons/Info';
 import clsx from 'clsx';
@@ -129,7 +131,7 @@ function App() {
     const itemsList = [
       {
         text: 'Home',
-        icon: <DirectionsCarIcon/>,
+        icon: <HomeIcon/>,
         onClick: () => history.push('/')
       },
       {
@@ -143,13 +145,8 @@ function App() {
         onClick: () => history.push('/apitest')
       },
       {
-        text: 'Add Movie',
-        icon: <PublicIcon/>,
-        onClick: () => history.push('/addmovie')
-      },
-      {
         text: 'Movies',
-        icon: <PublicIcon/>,
+        icon: <MovieFilterIcon/>,
         onClick: () => history.push('/movies')
       }
     ];

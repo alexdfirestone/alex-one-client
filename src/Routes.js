@@ -10,6 +10,8 @@ import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 import ApiTest from './containers/ApiTest';
 import AddMovie from './containers/AddMovie';
 import Movies from './containers/Movies';
+import Movie from './containers/Movie';
+import EditMovie from './containers/EditMovie';
 
 export default function Routes(){
     return(
@@ -34,6 +36,12 @@ export default function Routes(){
             </AuthenticatedRoute>
             <AuthenticatedRoute exact path='/movies'>
                 <Movies/>
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path={`/movies/:year/:id/edit`}>
+                <EditMovie />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path={`/movies/:year/:id`}>
+                <Movie />
             </AuthenticatedRoute>
             <Route>
                 <NotFound/>
